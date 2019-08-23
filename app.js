@@ -45,6 +45,21 @@ app.get('/api/v1/tours/:id', (req, res)=> {
     });
 });
 
+app.patch('api/v1/tours/:id', (req, res) => {
+    if(req.params.id*1 > tours.length){
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invaildi ID'
+        });
+    }
+
+    res.status(200).json({
+        data: {
+            tour: '<Updated toru here...>'
+        }
+    })
+})
+
 app.post('/api/v1/tours', (req, res) => {
     //console.lgo(req.body);
 

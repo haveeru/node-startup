@@ -5,15 +5,11 @@ const app = express();
 
 app.use(express.json());
 
-// app.get('/', (req, res)=> {
-//    res.status(200).json({message: 'hello from serve side', app: 'Natorus'});
-// });
-
 const tours = JSON.parse(
     fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
-app.get('/api/v1/tours', (req, res)=> {
+const getAllTours = (req, res)=> {
     res.status(200).json({
         status: 'success',
         results: tours.length,
@@ -22,9 +18,9 @@ app.get('/api/v1/tours', (req, res)=> {
             tours
         }
     })
-});
+}
 
-app.get('/api/v1/tours/:id', (req, res)=> {
+const getTour = (req, res)=> {
     console.log(req.param);
     const id = req.params.id * 1;
     const tour = tours.find(el => el.id === id);
@@ -43,38 +39,9 @@ app.get('/api/v1/tours/:id', (req, res)=> {
             tour
         }
     });
-});
+}
 
-app.patch('api/v1/tours/:id', (req, res) => {
-    if(req.params.id*1 > tours.length){
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Invaildi ID'
-        });
-    }
-
-    res.status(200).json({
-        data: null
-    })
-})
-
-app.delete('/api/v1/tours/:id', (req, res) => {
-    if(req.params.id*1 > tours.length){
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Invaildi ID'
-        });
-    }
-
-    res.status(204).json({
-        status: 'success',
-        data: {
-            tour: '<Updated toru here...>'
-        }
-    })
-})
-
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
     //console.lgo(req.body);
 
     const newId = tours[tours.length - 1].id + 1;
@@ -90,7 +57,53 @@ app.post('/api/v1/tours', (req, res) => {
             } 
         })
     });
-});
+}
+
+const updateTour = (req, res) => {
+    if(req.params.id*1 > tours.length){
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invaildi ID'
+        });
+    }
+
+    res.status(200).json({
+        data: null
+    })
+}
+
+const deleteTour = (req, res) => {
+    if(req.params.id*1 > tours.length){
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invaildi ID'
+        });
+    }
+
+    res.status(204).json({
+        status: 'success',
+        data: {
+            tour: '<Updated toru here...>'
+        }
+    })
+}
+
+//app.get('/api/v1/tours', getAllTours);
+//app.get('/api/v1/tours/:id', getTour);
+//app.post('/api/v1/tours', createTour);
+//app.patch('/api/v1/tours/:id', updateTour);
+//app.delete('/api/v1/tours/:id', deleteTour);
+
+app
+    .route('/api/v1/tours')
+    .get(getAllTours)
+    .post(createTour);
+
+app
+    .route('/api/v1/tours/:id')
+    .get(getTour)
+    .patch(updateTour)
+    .delete(deleteTour);
 
 const port = 3000;
 app.listen(port, () => {

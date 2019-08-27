@@ -105,7 +105,42 @@ const deleteTour = (req, res) => {
     })
 }
 
-//app.get('/api/v1/tours', getAllTours);
+const getAllUsers = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'this route is not yet defnied'
+    })
+}
+
+const getUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'this route is not yet defnied'
+    })
+}
+
+const createUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'this route is not yet defnied'
+    })
+}
+
+const updateUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'this route is not yet defnied'
+    })
+}
+
+const deleteUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'this route is not yet defnied'
+    })
+}
+
+//app.get('/api/v1/tours', getAllTours) ;
 //app.get('/api/v1/tours/:id', getTour);
 //app.post('/api/v1/tours', createTour);
 //app.patch('/api/v1/tours/:id', updateTour);
@@ -124,6 +159,18 @@ app
     .get(getTour)
     .patch(updateTour)
     .delete(deleteTour);
+
+
+app
+    .route('/api/v1/users')
+    .get(getAllUsers)
+    .post(createUser)
+
+app
+    .route('/api/v1/users/:id')
+    .get(getUser)
+    .patch(updateUser)
+    .delete(deleteUser);
 
 // 4) SERVER
 const port = 3000;

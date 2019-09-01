@@ -4,7 +4,7 @@
   "description": "learning code",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon server.js",
+    "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js"
   },
   "author": "",
@@ -21,6 +21,7 @@
     "eslint-plugin-react": "^7.14.3",
     "express": "^4.17.1",
     "global": "^4.4.0",
+    "mongoose": "^5.6.11",
     "morgan": "^1.9.1",
     "prettier": "^1.18.2"
   }

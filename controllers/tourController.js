@@ -25,9 +25,18 @@ exports.getAllTours = async (req, res) => {
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
       query = query.sort(sortBy);
-      // sor('price ratingsAverage')
+      // sort('price ratingsAverage')
     } else {
       query = query.sort('-createdAt');
+    }
+
+    // 3) Field limiting
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      // excluding '__v' fields
+      query = query.select('-__v');
     }
 
     // const query = await Tour.find()

@@ -29,7 +29,7 @@
     "ndb": "^1.1.4",
     "prettier": "^1.18.2",
     "slugify": "^1.3.4",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "engines": {
     "node": ">=11.0.0"
